@@ -1,13 +1,27 @@
 import 'package:flutter/material.dart';
 
-class CustomHomeSliverSearch extends StatelessWidget {
-  const CustomHomeSliverSearch({super.key});
+class CustomHomeSliverSearch extends StatefulWidget {
+  TextEditingController search;
+  CustomHomeSliverSearch({super.key, required this.search});
 
+  @override
+  State<CustomHomeSliverSearch> createState() => _CustomHomeSliverSearchState();
+}
+
+class _CustomHomeSliverSearchState extends State<CustomHomeSliverSearch> {
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
       title: TextField(
+        onChanged: (value) {
+          setState(() {
+            widget.search.text = value;
+          });
+        },
+        controller: widget.search,
+        scrollPadding: EdgeInsets.only(left: 10),
         decoration: InputDecoration(
+            hintText: 'Search Student',
             contentPadding: const EdgeInsets.all(10),
             enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(25),
